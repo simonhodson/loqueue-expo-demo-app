@@ -9,13 +9,6 @@ import {
     Alert
 } from 'react-native';
 import MapView from 'react-native-maps';
-// import {
-//     check,
-//     PERMISSIONS,
-//     RESULTS,
-//     request,
-//     openSettings
-// } from 'react-native-permissions';
 import MapImage from '../assets/ruscombe_demo.png';
 import HomeScreenWebView from '../components/HomeScreenWebview';
 import ConfigButton from '../components/ConfigButton';
@@ -73,7 +66,7 @@ const HomeScreen = () => {
     };
 
     const prepareParams = (uri) => {
-        const urlObject = new URL(uri);
+        const { searchParams } = new URL(uri);
 
         let propsObject = {
             uri,
@@ -81,9 +74,9 @@ const HomeScreen = () => {
             width: null
         };
 
-        if (!urlObject.searchParams) return propsObject;
+        if (!searchParams) return propsObject;
 
-        urlObject.searchParams.forEach((value, key) => {
+        searchParams.forEach((value, key) => {
             if (key === 'width') {
                 const valNumber = value.match(/\d/g);
 
